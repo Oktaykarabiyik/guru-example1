@@ -1,8 +1,9 @@
 package com.example.guruexample1.domain;
 
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,16 +16,16 @@ public class Author {
     private String lastnNme;
 
     @ManyToMany(mappedBy = "authors")
-    private Set<Book> books;
+    private Set<Book> books=new HashSet<>();
 
     public Author() {
 
     }
 
-    public Author(String firstName, String lastnNme, Set<Book> books) {
+    public Author(String firstName, String lastnNme) {
         this.firstName = firstName;
         this.lastnNme = lastnNme;
-        this.books = books;
+
     }
 
     public Long getId() {
