@@ -1,6 +1,6 @@
 package com.example.guruexample1.bootstrap;
 
-import com.example.guruexample1.Publisher;
+import com.example.guruexample1.domain.Publisher;
 import com.example.guruexample1.domain.Author;
 import com.example.guruexample1.domain.Book;
 import com.example.guruexample1.domain.repositories.AuthorRepository;
@@ -28,9 +28,9 @@ public class BootStrapData implements CommandLineRunner {
         Publisher publisher =new Publisher();
 
         publisher.setName("Oktay");
-        publisher.setName("Kastamonu");
+        publisher.setCity("Kastamonu");
 
-        publisherRepository.save(publisher);
+
         System.out.println(("Number of Publisher: "+publisherRepository.count()));
 
         Author eric = new Author("Eric","Evans");
@@ -39,11 +39,19 @@ public class BootStrapData implements CommandLineRunner {
         eric.getBooks().add(ddd);
         ddd.getAuthors().add(eric);
 
+
+
+
         authorRepository.save(eric);
         bookRepository.save(ddd);
 
+        ddd.setPublisher(publisher);
+        publisher.getBooks().add(ddd);
+        publisherRepository.save(publisher);
+
         System.out.println("Started in Bootstrap");
         System.out.println(("Number of Books: "+bookRepository.count()));
+        System.out.println("Publisher number of Books"+publisher.getBooks().size());
 
 
     }
